@@ -56,3 +56,64 @@ for i in range(len(y)):
 
 print("\nПроверка независимости")
 
+independent = True
+
+for i in range (len(x)):
+    for j in range(len(y)):
+        joint_p = P[i][j]
+        product_p = P_X[i] * P_Y[j]
+
+        print(f"P({x[i]}, {y[j]}) = {joint_p:.2f}")
+        print(f"P({x[i]}) * P({y[j]}) = {product_p:.2f}")
+
+        if not math.isclose(
+            joint_p,
+            product_p,
+            rel_tol=1e-9,
+            abs_tol=1e-9
+        ):
+            independent = False
+
+if independent:
+    print("\nАнсамбли X и Y независимы")
+
+else:
+    print("Ансамбли X и Y зависимы")
+
+H_XY = 0
+
+for row in P:
+    for probability in row:
+        if probability > 0:
+            H_XY -= probability * math.log2(probability)
+
+print("\nЭнтропия совместного ансамбля")
+print(f"H(X, Y) = {H_XY:.6f}")
+
+H_X = 0
+
+for probability in P_X:
+    if probability > 0:
+        H_X -= probability * math.log2(probability)
+
+print("\nЭнтропия ансамбля X")
+print(f"H(X) = {H_X:.6f}")
+
+H_Y = 0
+
+for probability in P_Y:
+    if probability > 0:
+        H_Y -= probability * math.log2(probability)
+
+print("\n6. Энтропия ансамбля Y")
+print(f"H(Y) = {H_Y:.6f}")
+
+print("\n7. Проверка H(X,Y) = H(X) + H(Y)")
+
+print(f"H(X,Y)      = {H_XY:.6f}")
+print(f"H(X) + H(Y) = {H_X + H_Y:.6f}")
+
+if math.isclose(H_XY, H_X + H_Y):
+    print("Равенство выполняется.")
+else:
+    print("Равенство не выполняется.")
