@@ -47,7 +47,7 @@ P_Y= [
 print("\nМаргинальные вероятности:")
 
 for i in range (len(x)):
-    print(f"P({x[i]})) = {P_X[i]:.2f}")
+    print(f"P({x[i]}) = {P_X[i]:.2f}")
 
 print()
 
@@ -84,8 +84,7 @@ H_XY = 0
 
 for row in P:
     for probability in row:
-        if probability > 0:
-            H_XY -= probability * math.log2(probability)
+        H_XY -= probability * math.log2(probability)
 
 print("\nЭнтропия совместного ансамбля")
 print(f"H(X, Y) = {H_XY:.6f}")
@@ -93,8 +92,7 @@ print(f"H(X, Y) = {H_XY:.6f}")
 H_X = 0
 
 for probability in P_X:
-    if probability > 0:
-        H_X -= probability * math.log2(probability)
+    H_X -= probability * math.log2(probability)
 
 print("\nЭнтропия ансамбля X")
 print(f"H(X) = {H_X:.6f}")
@@ -105,10 +103,10 @@ for probability in P_Y:
     if probability > 0:
         H_Y -= probability * math.log2(probability)
 
-print("\n6. Энтропия ансамбля Y")
+print("\nЭнтропия ансамбля Y")
 print(f"H(Y) = {H_Y:.6f}")
 
-print("\n7. Проверка H(X,Y) = H(X) + H(Y)")
+print("\nПроверка H(X,Y) = H(X) + H(Y)")
 
 print(f"H(X,Y)      = {H_XY:.6f}")
 print(f"H(X) + H(Y) = {H_X + H_Y:.6f}")
